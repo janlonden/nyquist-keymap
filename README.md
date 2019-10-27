@@ -2,7 +2,7 @@
 
 ## Flash
 
-Run `sudo make keebio/nyquist/rev2:default:avrdude` from qmk-firmware root folder.
+Run `sudo make keebio/nyquist/rev3:jan:avrdude` from qmk-firmware root folder.
 
 ## Clean build folder
 
