@@ -29,18 +29,18 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [COLEMAK_SOFT] = LAYOUT( \
     KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, _______, _______, KC_LGUI, KC_LCTL, KC_LSFT, KC_LALT, KC_RALT, \
-    SPACE__BROWSER, CM_G, CM_D, CM_B, RALT_O, KC_PSCREEN, _______, _______, KC_COMMA, MO(RIGHT_LAYERS), KC_DOT, _______, \
+    SPACE__BROWSER, CM_G, CM_D, CM_B, RALT_O, KC_PSCR, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
     CM_Q, CM_W, CM_F, CM_P, RALT_W, DF(COLEMAK_SOFT), _______, _______, CM_L, CM_U, CM_Y, CM_SCLN, \
     CM_A, CM_R, CM_S, CM_T, RALT_Q, DF(COLEMAK_HARD), _______, _______, CM_N, CM_E, CM_I, CM_O, \
-    CM_Z, CM_X, CM_C, CM_V, MO(LEFT_LAYERS), TG(CAPSLOCK_SOFT), LCTL(CM_D), KC_SPACE, CM_H, CM_K, CM_M, CM_J \
+    CM_Z, CM_X, CM_C, CM_V, MO(LEFT_LAYERS), TG(CAPSLOCK_SOFT), LCTL(CM_D), KC_SPC, CM_H, CM_K, CM_M, CM_J \
   ),
 
   [COLEMAK_HARD] = LAYOUT( \
     KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, _______, _______, KC_LGUI, KC_LCTL, KC_LSFT, KC_LALT, KC_RALT, \
-    SPACE__BROWSER, KC_G, KC_D, KC_B, XXXXXXX, KC_PSCREEN, _______, _______, KC_COMMA, MO(RIGHT_LAYERS), KC_DOT, _______, \
-    KC_Q, KC_W, KC_F, KC_P, XXXXXXX, DF(COLEMAK_SOFT), _______, _______, KC_L, KC_U, KC_Y, KC_SCOLON, \
+    SPACE__BROWSER, KC_G, KC_D, KC_B, XXXXXXX, KC_PSCR, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
+    KC_Q, KC_W, KC_F, KC_P, XXXXXXX, DF(COLEMAK_SOFT), _______, _______, KC_L, KC_U, KC_Y, KC_SCLN, \
     KC_A, KC_R, KC_S, KC_T, XXXXXXX, DF(COLEMAK_HARD), _______, _______, KC_N, KC_E, KC_I, KC_O, \
-    KC_Z, KC_X, KC_C, KC_V, MO(LEFT_LAYERS), TG(CAPSLOCK_HARD), LCTL(KC_D), KC_SPACE, KC_H, KC_K, KC_M, KC_J \
+    KC_Z, KC_X, KC_C, KC_V, MO(LEFT_LAYERS), TG(CAPSLOCK_HARD), LCTL(KC_D), KC_SPC, KC_H, KC_K, KC_M, KC_J \
   ),
 
   [CAPSLOCK_SOFT] = LAYOUT( \
@@ -60,18 +60,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [LEFT_LAYERS] = LAYOUT( \
-    _______, KC_PGUP, KC_DEL, KC_PGDOWN, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, KC_TAB, KC_ENTER, KC_ESCAPE, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, KC_PGUP, KC_DEL, KC_PGDN, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, KC_TAB, KC_ENT, KC_ESC, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, KC_HOME, KC_UP, KC_END, _______, _______, _______, _______, _______, _______, _______, _______, \
-    MO(NUMBERS), KC_LEFT, KC_DOWN, KC_RIGHT, _______, _______, _______, _______, _______, _______, _______, _______, \
-    MO(FUNCTION), MO(DEVELOPMENT), LCTL(KC_BSPACE), KC_BSPACE, _______, _______, _______, _______, _______, _______, _______, _______ \
+    MO(NUMBERS), KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, _______, _______, _______, _______, _______, \
+    MO(FUNCTION), MO(DEVELOPMENT), LCTL(KC_BSPC), KC_BSPC, _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
 
   [RIGHT_LAYERS] = LAYOUT( \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_SLASH, _______, KC_EQUAL, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_QUOTE, _______, _______, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_MINUS, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_SLSH, _______, KC_EQL, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_QUOT, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_MINS, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
 
@@ -79,8 +79,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, KC_7, KC_8, KC_9, _______, \
     _______, LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), _______, _______, _______, KC_4, KC_5, KC_6, _______, \
-    _______, KC_LALT, KC_LSFT, KC_LCTL, _______, _______, _______, _______, KC_1, KC_2, KC_3, KC_BSPACE, \
-    _______, _______, _______, _______, _______, KC_RALT, _______, _______, KC_0, KC_DOT, _______, KC_ENTER \
+    _______, KC_LALT, KC_LSFT, KC_LCTL, _______, _______, _______, _______, KC_1, KC_2, KC_3, KC_BSPC, \
+    _______, _______, _______, _______, _______, KC_RALT, _______, _______, KC_0, KC_DOT, _______, KC_ENT \
   ),
 
   [FUNCTION] = LAYOUT( \
@@ -93,18 +93,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [DEVELOPMENT] = LAYOUT( \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_GRAVE, _______, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_LEFT_PAREN, KC_RIGHT_PAREN, KC_EXCLAIM, _______, \
-    _______, _______, LCTL(CM_S), _______, _______, _______, _______, _______, S(KC_LBRACKET), S(KC_RBRACKET), S(KC_BSLASH), _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_LBRACKET, KC_RBRACKET, KC_BSLASH, _______ \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_GRV, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_LPRN, KC_RPRN, KC_EXLM, _______, \
+    _______, _______, LCTL(CM_S), _______, _______, _______, _______, _______, S(KC_LBRC), S(KC_RBRC), S(KC_BSLS), _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_LBRC, KC_RBRC, KC_BSLS, _______ \
   ),
 
   [BROWSER] = LAYOUT( \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, S(KC_SPACE), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
+    _______, S(KC_SPC), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, KC_BTN3, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, LCTL(KC_W), _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, _______, LCTL(KC_PGUP), LCTL(KC_PGDOWN), KC_ENT, _______, _______, _______, _______, _______, _______, _______ \
+    _______, _______, LCTL(KC_PGUP), LCTL(KC_PGDN), KC_ENT, _______, _______, _______, _______, _______, _______, _______ \
   )
 };
 
@@ -148,8 +148,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         layer_on(BROWSER);
       } else {
         if (timer_elapsed(key_timer) < 150) {
-          register_code(KC_SPACE);
-          unregister_code(KC_SPACE);
+          register_code(KC_SPC);
+          unregister_code(KC_SPC);
         }
         layer_off(BROWSER);
       }
