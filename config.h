@@ -25,9 +25,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RGBLIGHT_HUE_STEP 8
 #define RGBLIGHT_SAT_STEP 8
 #define RGBLIGHT_VAL_STEP 8
-#define NO_DEBUG
-#define NO_PRINT
-#define NO_ACTION_ONESHOT
-#define NO_ACTION_TAPPING
-#define NO_ACTION_MACRO
-#define NO_ACTION_FUNCTION
+// #define NO_DEBUG
+// #define NO_PRINT
+// #define NO_ACTION_ONESHOT
+// #define NO_ACTION_TAPPING
+// #define NO_ACTION_MACRO
+// #define NO_ACTION_FUNCTION
