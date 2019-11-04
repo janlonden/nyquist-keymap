@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_PGUP, KC_DEL, KC_PGDN, _______, _______, _______, _______, KC_F10, KC_F11, KC_F12, _______, \
     _______, LCTL(KC_PGUP), KC_TAB, LCTL(KC_PGDN), _______, _______, _______, _______, KC_F7, KC_F8, KC_F9, _______, \
     SET_FN, KC_LALT, KC_LSFT, KC_LCTL, _______, _______, _______, _______, KC_F4, KC_F5, KC_F6, _______, \
-    _______, _______, _______, _______, _______, KC_RALT, _______, _______, KC_F1, KC_F2, KC_F3, _______ \
+    _______, _______, _______, KC_BTN3, _______, KC_RALT, _______, _______, KC_F1, KC_F2, KC_F3, _______ \
   ),
 
   [NUMBERS] = LAYOUT( \
