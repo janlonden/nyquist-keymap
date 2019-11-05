@@ -24,15 +24,10 @@ enum custom_keycodes {
   _DOWN,
   _ENT,
   _EQL,
-  _LALT,
-  _LCTL,
   _LEFT,
-  _LSFT,
   _MINS,
   _QUOT,
-  _RALT,
   _RGHT,
-  _RSFT,
   _SLSH,
   _UP,
   _END,
@@ -355,46 +350,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         register_code(KC_BSPC);
       } else {
         unregister_code(KC_BSPC);
-        unregister_code(KC_LCTL);
-      }
-      return false;
-    case _RALT:
-      if (record->event.pressed) {
-        unregister_code(KC_LCTL);
-        register_code(KC_RALT);
-      } else {
-        unregister_code(KC_RALT);
-      }
-      return false;
-    case _LALT:
-      if (record->event.pressed) {
-        unregister_code(KC_LCTL);
-        register_code(KC_LALT);
-      } else {
-        unregister_code(KC_LALT);
-      }
-      return false;
-    case _LSFT:
-      if (record->event.pressed) {
-        unregister_code(KC_LCTL);
-        register_code(KC_LSFT);
-      } else {
-        unregister_code(KC_LSFT);
-      }
-      return false;
-    case _RSFT:
-      if (record->event.pressed) {
-        unregister_code(KC_LCTL);
-        register_code(KC_RSFT);
-      } else {
-        unregister_code(KC_RSFT);
-      }
-      return false;
-    case _LCTL:
-      if (record->event.pressed) {
-        unregister_code(KC_LCTL);
-        register_code(KC_LCTL);
-      } else {
         unregister_code(KC_LCTL);
       }
       return false;
