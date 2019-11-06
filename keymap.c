@@ -59,7 +59,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [COLEMAK_HARD] = LAYOUT( \
-    _______, _______, _______, _______, _______, _______, _______, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
+    KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, _______, _______, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
     SPC__BRWSR, KC_G, KC_D, KC_B, XXXXXXX, KC_PSCR, _______, _______, KC_COMM, SFT__RGHT_LAYERS, KC_DOT, _______, \
     KC_Q, KC_W, KC_F, KC_P, XXXXXXX, DF(COLEMAK_SOFT), _______, _______, KC_L, KC_U, KC_Y, KC_SCLN, \
     KC_A, KC_R, KC_S, KC_T, XXXXXXX, DF(COLEMAK_HARD), _______, _______, KC_N, KC_E, KC_I, KC_O, \
