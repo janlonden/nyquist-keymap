@@ -24,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LT(BROWSER, KC_SPC), CM_G, CM_D, CM_B, RALT(CM_O), KC_PSCR, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
     CM_Q, CM_W, CM_F, CM_P, RALT(CM_W), DF(COLEMAK_SOFT), _______, _______, CM_L, CM_U, CM_Y, CM_SCLN, \
     CM_A, CM_R, CM_S, CM_T, RALT(CM_Q), DF(COLEMAK_HARD), _______, _______, CM_N, CM_E, CM_I, CM_O, \
-    CM_Z, CM_X, CM_C, CM_V, MO(LEFT_LAYERS), TG(CAPSLOCK_SOFT), LCTL(CM_D), KC_SPC, CM_H, CM_K, CM_M, CM_J \
+    CM_Z, CM_X, CM_C, CM_V, MO(LEFT_LAYERS), MO(NUMBERS), LCTL(CM_D), KC_SPC, CM_H, CM_K, CM_M, CM_J \
   ),
 
   [COLEMAK_HARD] = LAYOUT( \
@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LT(BROWSER, KC_SPC), KC_G, KC_D, KC_B, XXXXXXX, KC_PSCR, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
     KC_Q, KC_W, KC_F, KC_P, XXXXXXX, DF(COLEMAK_SOFT), _______, _______, KC_L, KC_U, KC_Y, KC_SCLN, \
     KC_A, KC_R, KC_S, KC_T, XXXXXXX, DF(COLEMAK_HARD), _______, _______, KC_N, KC_E, KC_I, KC_O, \
-    KC_Z, KC_X, KC_C, KC_V, MO(LEFT_LAYERS), TG(CAPSLOCK_HARD), LCTL(KC_D), KC_SPC, KC_H, KC_K, KC_M, KC_J \
+    KC_Z, KC_X, KC_C, KC_V, MO(LEFT_LAYERS), MO(NUMBERS), LCTL(KC_D), KC_SPC, KC_H, KC_K, KC_M, KC_J \
   ),
 
   [CAPSLOCK_SOFT] = LAYOUT( \
@@ -56,7 +56,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     MO(RGB_MODES), KC_ENT, KC_LCTL, KC_ESC, _______, _______, _______, _______, _______, _______, _______, _______, \
     MO(RGB_OPTIONS), KC_HOME, KC_UP, KC_END, _______, _______, _______, _______, _______, _______, _______, _______, \
     MO(FUNCTION), KC_LEFT, KC_DOWN, KC_RGHT, _______, _______, _______, _______, _______, _______, _______, _______, \
-    MO(NUMBERS), MO(DEVELOPMENT), LCTL(KC_BSPC), KC_BSPC, _______, _______, _______, _______, _______, _______, _______, _______ \
+    TG(CAPSLOCK_SOFT), MO(DEVELOPMENT), LCTL(KC_BSPC), KC_BSPC, _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
 
   [RIGHT_LAYERS] = LAYOUT( \
