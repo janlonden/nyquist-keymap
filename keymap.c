@@ -152,8 +152,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return true;
     case LCTL(KC_BSPC):
     case MO(DEVELOPMENT):
-    case MO(RGB_OPTIONS):
-    case MO(RGB_MODES):
     case KC_UP:
     case KC_LEFT:
     case KC_DOWN:
@@ -166,7 +164,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       unregister_code(KC_LSFT);
 
       return true;
-    case MO(FUNCTION):
     case KC_SLSH:
     case KC_QUOT:
     case KC_MINS:
