@@ -2,10 +2,11 @@
 
 ## Flash
 
-1. Use QMK Firmware >= 0.19.4.
-1. Run `qmk compile -kb keebio/nyquist/rev3 -km jan` from qmk-firmware root folder.
-1. Push the reset button on the PCB.
-1. Run `qmk flash -kb keebio/nyquist/rev3 -km jan` from qmk-firmware root folder.
+1. Use QMK Firmware >= 0.31.6
+1. Run `qmk compile -kb keebio/nyquist/rev3 -km jan` from qmk-firmware root folder
+1. Connect the keyboard
+1. Push the reset button on the PCB
+1. Run `qmk flash -kb keebio/nyquist/rev3 -km jan` from qmk-firmware root folder
 
 ## Clean build
 
