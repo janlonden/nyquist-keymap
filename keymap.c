@@ -18,7 +18,7 @@ enum custom_layers {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [COLEMAK_SOFT] = LAYOUT( \
-    KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, _______, _______, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
+    KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_CAPS, KC_CAPS, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
     LT(BROWSER, KC_SPC), CM_G, CM_D, CM_B, RALT(CM_O), KC_PSCR, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
     CM_Q, CM_W, CM_F, CM_P, RALT(CM_W), DF(COLEMAK_SOFT), _______, _______, CM_L, CM_U, CM_Y, CM_SCLN, \
     CM_A, CM_R, CM_S, CM_T, RALT(CM_Q), DF(COLEMAK_HARD), _______, _______, CM_N, CM_E, CM_I, CM_O, \
@@ -26,7 +26,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 
   [COLEMAK_HARD] = LAYOUT( \
-    KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, _______, _______, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
+    KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_CAPS, KC_CAPS, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
     LT(BROWSER, KC_SPC), KC_G, KC_D, KC_B, XXXXXXX, KC_PSCR, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
     KC_Q, KC_W, KC_F, KC_P, XXXXXXX, DF(COLEMAK_SOFT), _______, _______, KC_L, KC_U, KC_Y, KC_SCLN, \
     KC_A, KC_R, KC_S, KC_T, XXXXXXX, DF(COLEMAK_HARD), _______, _______, KC_N, KC_E, KC_I, KC_O, \
