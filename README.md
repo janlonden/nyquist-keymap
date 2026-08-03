@@ -3,6 +3,7 @@
 ## Flash
 
 1. Use QMK Firmware >= 0.31.6
+1. If on Windows: run QMK MSYS in the C:\QMK_MSYS folder
 1. Run `qmk compile -kb keebio/nyquist/rev3 -km jan` from qmk-firmware root folder
 1. Connect the keyboard
 1. Push the reset button on the PCB
