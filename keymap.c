@@ -31,7 +31,15 @@ enum custom_keycodes {
   // explicit so it doesn't depend on Shift+base-key, which is 'O with the o umlaut key under Swedish
   SE_COLN,
   // explicit since the bare semicolon HID key produces ö under Swedish
-  SE_SCLN
+  SE_SCLN,
+  // NUMBERS layer digits whose shifted symbol should match the US row (@ $ ^ & * ( )) instead of the Swedish default
+  NUM_2,
+  NUM_4,
+  NUM_6,
+  NUM_7,
+  NUM_8,
+  NUM_9,
+  NUM_0
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -79,10 +87,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [NUMBERS] = LAYOUT( \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, LCTL(KC_PGUP), KC_LSFT, LCTL(KC_PGDN), _______, _______, _______, _______, KC_7, KC_8, KC_9, _______, \
-    _______, S(KC_TAB), OS_TASK_SW, KC_TAB, _______, _______, _______, _______, KC_4, KC_5, KC_6, _______, \
-    _______, OS_CUT, OS_COPY, OS_PASTE, _______, _______, _______, _______, KC_1, KC_2, KC_3, _______, \
-    _______, KC_DEL, OS_WORD_DEL, KC_BSPC, _______, _______, _______, _______, KC_0, KC_DOT, _______, _______ \
+    _______, LCTL(KC_PGUP), KC_LSFT, LCTL(KC_PGDN), _______, _______, _______, _______, NUM_7, NUM_8, NUM_9, _______, \
+    _______, S(KC_TAB), OS_TASK_SW, KC_TAB, _______, _______, _______, _______, NUM_4, KC_5, NUM_6, _______, \
+    _______, OS_CUT, OS_COPY, OS_PASTE, _______, _______, _______, _______, KC_1, NUM_2, KC_3, _______, \
+    _______, KC_DEL, OS_WORD_DEL, KC_BSPC, _______, _______, _______, _______, NUM_0, KC_DOT, _______, _______ \
   ),
 
   // keycodes chosen for correct output under a Swedish OS layout on both Windows and macOS
@@ -119,8 +127,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   )
 };
 
+// drops any currently-held Shift for the duration of the tap, then restores it (used to send an AltGr/Shift combo that differs from plain Shift+key)
+static void tap_dropping_shift(uint16_t keycode) {
+  bool lsft = get_mods() & MOD_BIT(KC_LSFT);
+  bool rsft = get_mods() & MOD_BIT(KC_RSFT);
+  if (lsft) unregister_code(KC_LSFT);
+  if (rsft) unregister_code(KC_RSFT);
+  tap_code16(keycode);
+  if (lsft) register_code(KC_LSFT);
+  if (rsft) register_code(KC_RSFT);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch(keycode) {
+    case NUM_2:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) tap_dropping_shift(RALT(KC_2)); // @
+        else tap_code(KC_2);
+      }
+
+      return false;
+    case NUM_4:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) tap_dropping_shift(RALT(KC_4)); // $
+        else tap_code(KC_4);
+      }
+
+      return false;
+    case NUM_6:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) {
+          tap_dropping_shift(S(KC_RBRC)); // dead circumflex on the ¨/^ key
+          tap_code(KC_SPC); // space finalizes the dead key into a standalone ^
+        } else tap_code(KC_6);
+      }
+
+      return false;
+    case NUM_7:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) tap_dropping_shift(S(KC_6)); // &
+        else tap_code(KC_7);
+      }
+
+      return false;
+    case NUM_8:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) tap_dropping_shift(S(KC_QUOT)); // *
+        else tap_code(KC_8);
+      }
+
+      return false;
+    case NUM_9:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) tap_dropping_shift(S(KC_8)); // (
+        else tap_code(KC_9);
+      }
+
+      return false;
+    case NUM_0:
+      if (record->event.pressed) {
+        if (get_mods() & MOD_MASK_SHIFT) tap_dropping_shift(S(KC_9)); // )
+        else tap_code(KC_0);
+      }
+
+      return false;
     case OS_CUT:
       if (record->event.pressed) tap_code16(detected_host_os() == OS_MACOS ? LGUI(KC_X) : LCTL(KC_X));
 
@@ -181,6 +251,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) tap_code16((get_mods() & MOD_MASK_SHIFT) ? S(KC_DOT) : S(KC_COMM));
 
       return false;
+    case S(KC_7):
+      // both MO(LEFT_LAYERS) and MO(RIGHT_LAYERS) held: send ? instead of the single-shift /
+      if (record->event.pressed && (get_mods() & MOD_BIT(KC_LSFT)) && (get_mods() & MOD_BIT(KC_RSFT))) {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_RSFT);
+        tap_code16(S(KC_MINS));
+        // both MO keys are still held, so restore the shifts they own
+        register_code(KC_LSFT);
+        register_code(KC_RSFT);
+
+        return false;
+      }
+
+      return true;
+    case S(KC_0):
+      // both MO(LEFT_LAYERS) and MO(RIGHT_LAYERS) held: send + instead of the single-shift =
+      if (record->event.pressed && (get_mods() & MOD_BIT(KC_LSFT)) && (get_mods() & MOD_BIT(KC_RSFT))) {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_RSFT);
+        tap_code16(KC_MINS);
+        // both MO keys are still held, so restore the shifts they own
+        register_code(KC_LSFT);
+        register_code(KC_RSFT);
+
+        return false;
+      }
+
+      return true;
     case MO(LEFT_LAYERS):
       record->event.pressed ? register_code(KC_LSFT) : unregister_code(KC_LSFT);
 
@@ -204,6 +302,26 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       return true;
     case KC_NUHS:
+      // both MO(LEFT_LAYERS) and MO(RIGHT_LAYERS) held: send " instead of the single-shift '
+      if (record->event.pressed && (get_mods() & MOD_BIT(KC_LSFT)) && (get_mods() & MOD_BIT(KC_RSFT))) {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_RSFT);
+        tap_code16(S(KC_2));
+        // both MO keys are still held, so restore the shifts they own
+        register_code(KC_LSFT);
+        register_code(KC_RSFT);
+
+        return false;
+      }
+
+      // only drop RSFT while this key is down, and only restore it if RIGHT_LAYERS is still held
+      if (record->event.pressed) {
+        unregister_code(KC_RSFT);
+      } else if (layer_state_is(RIGHT_LAYERS)) {
+        register_code(KC_RSFT);
+      }
+
+      return true;
     case KC_SLSH:
       unregister_code(KC_RSFT);
 
