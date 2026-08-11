@@ -1,11 +1,8 @@
 #include QMK_KEYBOARD_H
-#include "keymap_colemak.h"
 
 enum custom_layers {
-  COLEMAK_SOFT = 0,
-  COLEMAK_HARD,
-  CAPSLOCK_SOFT,
-  CAPSLOCK_HARD,
+  COLEMAK = 0,
+  QWERTY,
   BROWSER,
   LEFT_LAYERS,
   NUMBERS,
@@ -25,40 +22,34 @@ enum custom_keycodes {
   OS_CLOSE_TAB,
   OS_WORD_DEL,
   OS_TASK_SW,
-  OS_SCREENSHOT
+  OS_SCREENSHOT,
+  // Swedish layout symbols whose modifier/key combo differs between Windows and macOS
+  SE_LCBR,
+  SE_RCBR,
+  SE_BSLS,
+  SE_PIPE,
+  // explicit so it doesn't depend on Shift+base-key, which is 'O with the o umlaut key under Swedish
+  SE_COLN,
+  // explicit since the bare semicolon HID key produces ö under Swedish
+  SE_SCLN
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [COLEMAK_SOFT] = LAYOUT( \
+  // default layer: hard-coded Colemak (works regardless of host OS layout)
+  [COLEMAK] = LAYOUT( \
     KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_CAPS, KC_CAPS, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
-    LT(BROWSER, KC_SPC), CM_G, CM_D, CM_B, RALT(CM_O), OS_SCREENSHOT, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
-    CM_Q, CM_W, CM_F, CM_P, RALT(CM_W), DF(COLEMAK_SOFT), _______, _______, CM_L, CM_U, CM_Y, CM_SCLN, \
-    CM_A, CM_R, CM_S, CM_T, RALT(CM_Q), DF(COLEMAK_HARD), _______, _______, CM_N, CM_E, CM_I, CM_O, \
-    CM_Z, CM_X, CM_C, CM_V, MO(LEFT_LAYERS), MO(NUMBERS), MO(FUNCTION), KC_SPC, CM_H, CM_K, CM_M, CM_J \
-  ),
-
-  [COLEMAK_HARD] = LAYOUT( \
-    KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_CAPS, KC_CAPS, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
-    LT(BROWSER, KC_SPC), KC_G, KC_D, KC_B, XXXXXXX, OS_SCREENSHOT, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
-    KC_Q, KC_W, KC_F, KC_P, XXXXXXX, DF(COLEMAK_SOFT), _______, _______, KC_L, KC_U, KC_Y, KC_SCLN, \
-    KC_A, KC_R, KC_S, KC_T, XXXXXXX, DF(COLEMAK_HARD), _______, _______, KC_N, KC_E, KC_I, KC_O, \
+    LT(BROWSER, KC_SPC), KC_G, KC_D, KC_B, KC_SCLN, OS_SCREENSHOT, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
+    KC_Q, KC_W, KC_F, KC_P, KC_LBRC, DF(COLEMAK), _______, _______, KC_L, KC_U, KC_Y, SE_SCLN, \
+    KC_A, KC_R, KC_S, KC_T, KC_QUOT, DF(QWERTY), _______, _______, KC_N, KC_E, KC_I, KC_O, \
     KC_Z, KC_X, KC_C, KC_V, MO(LEFT_LAYERS), MO(NUMBERS), MO(FUNCTION), KC_SPC, KC_H, KC_K, KC_M, KC_J \
   ),
 
-  [CAPSLOCK_SOFT] = LAYOUT( \
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, S(CM_G), S(CM_D), S(CM_B), S(RALT(CM_O)), _______, _______, _______, _______, _______, _______, _______, \
-    S(CM_Q), S(CM_W), S(CM_F), S(CM_P), S(RALT(CM_W)), _______, _______, _______, S(CM_L), S(CM_U), S(CM_Y), _______, \
-    S(CM_A), S(CM_R), S(CM_S), S(CM_T), S(RALT(CM_Q)), _______, _______, _______, S(CM_N), S(CM_E), S(CM_I), S(CM_O), \
-    S(CM_Z), S(CM_X), S(CM_C), S(CM_V), _______, _______, _______, _______, S(CM_H), S(CM_K), S(CM_M), S(CM_J) \
-  ),
-
-  [CAPSLOCK_HARD] = LAYOUT( \
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, S(KC_G), S(KC_D), S(KC_B), _______, _______, _______, _______, _______, _______, _______, _______, \
-    S(KC_Q), S(KC_W), S(KC_F), S(KC_P), _______, _______, _______, _______, S(KC_L), S(KC_U), S(KC_Y), _______, \
-    S(KC_A), S(KC_R), S(KC_S), S(KC_T), _______, _______, _______, _______, S(KC_N), S(KC_E), S(KC_I), S(KC_O), \
-    S(KC_Z), S(KC_X), S(KC_C), S(KC_V), _______, _______, _______, _______, S(KC_H), S(KC_K), S(KC_M), S(KC_J) \
+  [QWERTY] = LAYOUT( \
+    KC_RALT, KC_LALT, KC_LSFT, KC_LCTL, KC_LGUI, KC_CAPS, KC_CAPS, KC_RGUI, KC_RCTL, KC_RSFT, KC_LALT, KC_RALT, \
+    LT(BROWSER, KC_SPC), KC_T, KC_G, KC_B, KC_SCLN, OS_SCREENSHOT, _______, _______, KC_COMM, MO(RIGHT_LAYERS), KC_DOT, _______, \
+    KC_Q, KC_W, KC_E, KC_R, KC_LBRC, DF(COLEMAK), _______, _______, KC_U, KC_I, KC_O, KC_P, \
+    KC_A, KC_S, KC_D, KC_F, KC_QUOT, DF(QWERTY), _______, _______, KC_J, KC_K, KC_L, SE_SCLN, \
+    KC_Z, KC_X, KC_C, KC_V, MO(LEFT_LAYERS), MO(NUMBERS), MO(FUNCTION), KC_SPC, KC_H, KC_N, KC_M, KC_Y \
   ),
 
   [LEFT_LAYERS] = LAYOUT( \
@@ -69,11 +60,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, MO(DEVELOPMENT), OS_WORD_DEL, KC_BSPC, _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
 
+  // keycodes chosen so these produce / = ' - under a Swedish OS layout (same on Windows and macOS)
   [RIGHT_LAYERS] = LAYOUT( \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_SLSH, _______, KC_EQL, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_QUOT, _______, _______, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_MINS, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, S(KC_7), _______, S(KC_0), _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_NUHS, _______, _______, _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, KC_SLSH, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, KC_RCTL, _______, _______, _______, _______ \
   ),
 
@@ -81,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, KC_F10, KC_F11, KC_F12, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, KC_F7, KC_F8, KC_F9, _______, \
     _______, MO(RGB_MODES), _______, MO(RGB_OPTIONS), _______, _______, _______, _______, KC_F4, KC_F5, KC_F6, _______, \
-    _______, KC_PGUP, TG(CAPSLOCK_SOFT), KC_PGDN, _______, _______, _______, _______, KC_F1, KC_F2, KC_F3, _______, \
+    _______, KC_PGUP, KC_CAPS, KC_PGDN, _______, _______, _______, _______, KC_F1, KC_F2, KC_F3, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
 
@@ -93,12 +85,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_DEL, OS_WORD_DEL, KC_BSPC, _______, _______, _______, _______, KC_0, KC_DOT, _______, _______ \
   ),
 
+  // keycodes chosen for correct output under a Swedish OS layout on both Windows and macOS
   [DEVELOPMENT] = LAYOUT( \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, S(KC_7), KC_GRAVE, S(KC_4), _______, \
-    _______, _______, _______, _______, _______, _______, _______, _______, KC_LPRN, KC_RPRN, KC_EXLM, _______, \
-    _______, _______, OS_SAVE, MS_BTN3, _______, _______, _______, _______, S(KC_LBRC), S(KC_RBRC), S(KC_BSLS), _______, \
-    _______, MO(DEVELOPMENT), _______, _______, _______, _______, _______, _______, KC_LBRC, KC_RBRC, KC_BSLS, _______ \
+    _______, _______, _______, _______, _______, _______, _______, _______, S(KC_6), S(KC_EQL), RALT(KC_4), _______, \
+    _______, _______, _______, _______, _______, _______, _______, _______, S(KC_8), S(KC_9), KC_EXLM, _______, \
+    _______, _______, OS_SAVE, MS_BTN3, _______, _______, _______, _______, SE_LCBR, SE_RCBR, SE_PIPE, _______, \
+    _______, MO(DEVELOPMENT), _______, _______, _______, _______, _______, _______, RALT(KC_8), RALT(KC_9), SE_BSLS, _______ \
   ),
 
   [BROWSER] = LAYOUT( \
@@ -141,7 +134,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
       return false;
     case OS_SAVE:
-      if (record->event.pressed) tap_code16(detected_host_os() == OS_MACOS ? LGUI(CM_S) : LCTL(CM_S));
+      if (record->event.pressed) tap_code16(detected_host_os() == OS_MACOS ? LGUI(KC_S) : LCTL(KC_S));
 
       return false;
     case OS_CLOSE_TAB:
@@ -163,28 +156,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
 
       return false;
-    case RALT(CM_O):
-      if (record->event.pressed) SEND_STRING(SS_RALT("p"));
+    case SE_LCBR:
+      if (record->event.pressed) tap_code16(detected_host_os() == OS_MACOS ? S(LALT(KC_8)) : RALT(KC_7));
 
       return false;
-    case RALT(CM_Q):
-      if (record->event.pressed) SEND_STRING(SS_RALT("q"));
+    case SE_RCBR:
+      if (record->event.pressed) tap_code16(detected_host_os() == OS_MACOS ? S(LALT(KC_9)) : RALT(KC_0));
 
       return false;
-    case RALT(CM_W):
-      if (record->event.pressed) SEND_STRING(SS_RALT("w"));
+    case SE_BSLS:
+      if (record->event.pressed) tap_code16(detected_host_os() == OS_MACOS ? S(LALT(KC_7)) : RALT(KC_MINS));
 
       return false;
-    case S(RALT(CM_O)):
-      if (record->event.pressed) SEND_STRING(SS_LSFT(SS_RALT("p")));
+    case SE_PIPE:
+      if (record->event.pressed) tap_code16(detected_host_os() == OS_MACOS ? LALT(KC_7) : RALT(KC_NUBS));
 
       return false;
-    case S(RALT(CM_Q)):
-      if (record->event.pressed) SEND_STRING(SS_LSFT(SS_RALT("q")));
+    case SE_COLN:
+      if (record->event.pressed) tap_code16(S(KC_DOT));
 
       return false;
-    case S(RALT(CM_W)):
-      if (record->event.pressed) SEND_STRING(SS_LSFT(SS_RALT("w")));
+    case SE_SCLN:
+      // shift (e.g. held by MO(LEFT_LAYERS)/MO(RIGHT_LAYERS)) turns ; into :
+      if (record->event.pressed) tap_code16((get_mods() & MOD_MASK_SHIFT) ? S(KC_DOT) : S(KC_COMM));
 
       return false;
     case MO(LEFT_LAYERS):
@@ -209,10 +203,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       unregister_code(KC_LSFT);
 
       return true;
+    case KC_NUHS:
     case KC_SLSH:
-    case KC_QUOT:
-    case KC_MINS:
-    case KC_EQL:
       unregister_code(KC_RSFT);
 
       return true;
