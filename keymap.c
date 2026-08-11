@@ -28,6 +28,7 @@ enum custom_keycodes {
   SE_RCBR,
   SE_BSLS,
   SE_PIPE,
+  SE_TILD,
   // explicit so it doesn't depend on Shift+base-key, which is 'O with the o umlaut key under Swedish
   SE_COLN,
   // explicit since the bare semicolon HID key produces ö under Swedish
@@ -98,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, S(KC_6), S(KC_EQL), RALT(KC_4), _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, S(KC_8), S(KC_9), KC_EXLM, _______, \
-    _______, _______, OS_SAVE, MS_BTN3, _______, _______, _______, _______, SE_LCBR, SE_RCBR, SE_PIPE, _______, \
+    _______, _______, OS_SAVE, MS_BTN3, _______, _______, _______, _______, SE_LCBR, SE_RCBR, SE_PIPE, SE_TILD, \
     _______, MO(DEVELOPMENT), _______, _______, _______, _______, _______, _______, RALT(KC_8), RALT(KC_9), SE_BSLS, _______ \
   ),
 
@@ -172,7 +173,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case NUM_8:
       if (record->event.pressed) {
-        if (get_mods() & MOD_MASK_SHIFT) tap_dropping_shift(S(KC_QUOT)); // *
+        if (get_mods() & MOD_MASK_SHIFT) tap_dropping_shift(S(KC_NUHS)); // *
         else tap_code(KC_8);
       }
 
@@ -240,6 +241,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     case SE_PIPE:
       if (record->event.pressed) tap_code16(detected_host_os() == OS_MACOS ? LALT(KC_7) : RALT(KC_NUBS));
+
+      return false;
+    case SE_TILD:
+      // dead tilde on the ¨/^ key; space finalizes it into a standalone ~
+      if (record->event.pressed) {
+        tap_code16(RALT(KC_RBRC));
+        tap_code(KC_SPC);
+      }
 
       return false;
     case SE_COLN:
