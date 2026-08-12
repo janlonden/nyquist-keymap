@@ -297,6 +297,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
 
       return true;
+    case KC_COMM:
+      // LEFT_LAYERS held: send < (macOS puts the ISO <> key on KC_GRV, Windows/Linux on KC_NUBS)
+      if (layer_state_is(LEFT_LAYERS)) {
+        if (record->event.pressed) tap_dropping_shift(detected_host_os() == OS_MACOS ? KC_GRV : KC_NUBS);
+
+        return false;
+      }
+
+      return true;
+    case KC_DOT:
+      // LEFT_LAYERS held: send > (shifted ISO <> key)
+      if (layer_state_is(LEFT_LAYERS)) {
+        if (record->event.pressed) tap_dropping_shift(detected_host_os() == OS_MACOS ? S(KC_GRV) : S(KC_NUBS));
+
+        return false;
+      }
+
+      return true;
     case MO(LEFT_LAYERS):
       record->event.pressed ? register_code(KC_LSFT) : unregister_code(KC_LSFT);
 
